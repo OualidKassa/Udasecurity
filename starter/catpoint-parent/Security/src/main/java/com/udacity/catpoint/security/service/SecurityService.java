@@ -1,14 +1,18 @@
-package com.udacity.catpoint.service;
+package com.udacity.catpoint.security.service;
 
-import com.udacity.catpoint.application.StatusListener;
-import com.udacity.catpoint.data.AlarmStatus;
-import com.udacity.catpoint.data.ArmingStatus;
-import com.udacity.catpoint.data.SecurityRepository;
-import com.udacity.catpoint.data.Sensor;
+import com.udacity.catpoint.security.application.StatusListener;
+import com.udacity.catpoint.security.data.AlarmStatus;
+import com.udacity.catpoint.security.data.ArmingStatus;
+import com.udacity.catpoint.security.data.SecurityRepository;
+import com.udacity.catpoint.security.data.Sensor;
+import com.udacity.catpoint.image.service.FakeImageService;
 
 import java.awt.image.BufferedImage;
 import java.util.HashSet;
 import java.util.Set;
+
+import static com.udacity.catpoint.security.data.AlarmStatus.*;
+import static com.udacity.catpoint.security.data.AlarmStatus.NO_ALARM;
 
 /**
  * Service that receives information about changes to the security system. Responsible for
@@ -35,7 +39,7 @@ public class SecurityService {
      */
     public void setArmingStatus(ArmingStatus armingStatus) {
         if(armingStatus == ArmingStatus.DISARMED) {
-            setAlarmStatus(AlarmStatus.NO_ALARM);
+            setAlarmStatus(NO_ALARM);
         }
         securityRepository.setArmingStatus(armingStatus);
     }
@@ -47,9 +51,9 @@ public class SecurityService {
      */
     private void catDetected(Boolean cat) {
         if(cat && getArmingStatus() == ArmingStatus.ARMED_HOME) {
-            setAlarmStatus(AlarmStatus.ALARM);
+            setAlarmStatus(ALARM);
         } else {
-            setAlarmStatus(AlarmStatus.NO_ALARM);
+            setAlarmStatus(NO_ALARM);
         }
 
         statusListeners.forEach(sl -> sl.catDetected(cat));
@@ -84,8 +88,8 @@ public class SecurityService {
             return; //no problem if the system is disarmed
         }
         switch(securityRepository.getAlarmStatus()) {
-            case NO_ALARM : setAlarmStatus(AlarmStatus.PENDING_ALARM);
-            case PENDING_ALARM : setAlarmStatus(AlarmStatus.ALARM);
+            case NO_ALARM : setAlarmStatus(PENDING_ALARM);
+            case PENDING_ALARM : setAlarmStatus(ALARM);
         }
     }
 
@@ -94,8 +98,8 @@ public class SecurityService {
      */
     private void handleSensorDeactivated() {
         switch(securityRepository.getAlarmStatus()) {
-            case PENDING_ALARM : setAlarmStatus(AlarmStatus.NO_ALARM);
-            case ALARM : setAlarmStatus(AlarmStatus.PENDING_ALARM);
+            case PENDING_ALARM : setAlarmStatus(NO_ALARM);
+            case ALARM : setAlarmStatus(PENDING_ALARM);
         }
     }
 

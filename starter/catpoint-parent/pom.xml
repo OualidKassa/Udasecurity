@@ -7,6 +7,10 @@
   <groupId>com.udacity.catpoint</groupId>
   <artifactId>catpoint-parent</artifactId>
   <version>1.0-SNAPSHOT</version>
+  <modules>
+    <module>Image</module>
+    <module>Security</module>
+  </modules>
   <packaging>pom</packaging>
   <name>udasecurity</name>
   <url>http://www.example.com</url>
@@ -75,7 +79,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.8.0</version>
+          <version>3.5.1</version>
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
