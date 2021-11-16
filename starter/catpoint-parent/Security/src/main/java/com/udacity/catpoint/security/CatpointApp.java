@@ -1,7 +1,7 @@
-package com.udacity.catpoint.security.application;
+package com.udacity.catpoint.security;
 
 
-
+import com.udacity.catpoint.security.application.CatpointGui;
 
 /**
  * This is the main class that launches the application.
