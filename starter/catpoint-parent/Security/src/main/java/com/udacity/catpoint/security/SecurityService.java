@@ -1,4 +1,4 @@
-package com.udacity.catpoint.security.service;
+package com.udacity.catpoint.security;
 
 import com.udacity.catpoint.image.service.ImageService;
 import com.udacity.catpoint.security.application.StatusListener;

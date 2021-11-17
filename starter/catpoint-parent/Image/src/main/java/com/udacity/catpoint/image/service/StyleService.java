@@ -3,7 +3,7 @@ package com.udacity.catpoint.image.service;
 import java.awt.*;
 
 /**
- * Simple "service" for providing style information.
+ * Simple "com.udacity.catpoint.security.service" for providing style information.
  */
 public class StyleService {
 

@@ -3,9 +3,8 @@ package com.udacity.catpoint.security.service;
 import com.udacity.catpoint.image.service.ImageService;
 import com.udacity.catpoint.security.application.StatusListener;
 import com.udacity.catpoint.security.data.*;
+import com.udacity.catpoint.security.SecurityService;
 import net.bytebuddy.utility.RandomString;
-import org.hamcrest.Matcher;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -58,7 +57,7 @@ public class SecurityServiceTest {
     }
 
     @BeforeEach
-    void init(){
+    public void init(){
         securityService = new SecurityService(securityRepository, imageService);
         sensor = new Sensor(new RandomString().nextString(), SensorType.DOOR);
     }
@@ -101,7 +100,7 @@ public class SecurityServiceTest {
     }
 
     @Test
-    void changeAlarmState_sensorDeactivateWhileInactive_noChangeToAlarmState() {
+    public void changeAlarmState_sensorDeactivateWhileInactive_noChangeToAlarmState() {
         when(securityRepository.getAlarmStatus()).thenReturn(AlarmStatus.NO_ALARM);
         sensor.setActive(Boolean.FALSE);
         securityService.changeSensorActivationStatus(sensor, false);
@@ -146,13 +145,13 @@ public class SecurityServiceTest {
     }
 
     @Test
-    void resetAllSensors_IfTheSystemIsArmed() {
+    public void resetAllSensors_IfTheSystemIsArmed() {
         securityService.setArmingStatus(ArmingStatus.ARMED_HOME);
         assertTrue(securityService.getSensors().stream().allMatch(sensor -> Boolean.FALSE.equals(sensor.getActive())));
     }
 
     @Test
-    void setAlarmStatusToAlarm_systemArmedHomeAndCatDetected() {
+    public void setAlarmStatusToAlarm_systemArmedHomeAndCatDetected() {
         when(imageService.imageContainsCat(any(), anyFloat())).thenReturn(true);
         when(securityRepository.getArmingStatus()).thenReturn(ArmingStatus.ARMED_HOME);
         securityService.processImage(mock(BufferedImage.class));

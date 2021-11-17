@@ -3,7 +3,7 @@ package com.udacity.catpoint.security.application;
 
 import com.udacity.catpoint.image.service.StyleService;
 import com.udacity.catpoint.security.data.AlarmStatus;
-import com.udacity.catpoint.security.service.SecurityService;
+import com.udacity.catpoint.security.SecurityService;
 import net.miginfocom.swing.MigLayout;
 
 import javax.imageio.ImageIO;
@@ -60,7 +60,7 @@ public class ImagePanel extends JPanel implements StatusListener {
             repaint();
         });
 
-        //button that sends the image to the image service
+        //button that sends the image to the image com.udacity.catpoint.security.service
         JButton scanPictureButton = new JButton("Scan Picture");
         scanPictureButton.addActionListener(e -> {
             securityService.processImage(currentCameraImage);
