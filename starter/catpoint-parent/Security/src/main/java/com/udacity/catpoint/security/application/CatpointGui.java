@@ -6,7 +6,7 @@ import com.udacity.catpoint.image.service.FakeImageService;
 import com.udacity.catpoint.image.service.ImageService;
 import com.udacity.catpoint.security.data.PretendDatabaseSecurityRepositoryImpl;
 import com.udacity.catpoint.security.data.SecurityRepository;
-import com.udacity.catpoint.security.SecurityService;
+import com.udacity.catpoint.security.service.SecurityService;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
