@@ -1,5 +1,5 @@
 module com.udacity.catpoint.security {
-    requires miglayout;
+    requires com.miglayout.swing;
     requires java.desktop;
     requires com.google.gson;
     requires com.google.common;
