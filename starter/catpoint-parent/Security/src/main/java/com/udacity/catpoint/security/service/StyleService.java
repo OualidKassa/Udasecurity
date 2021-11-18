@@ -1,4 +1,4 @@
-package com.udacity.catpoint.image.service;
+package com.udacity.catpoint.security.service;
 
 import java.awt.*;
 
