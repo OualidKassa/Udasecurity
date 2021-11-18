@@ -32,7 +32,7 @@ public class SensorPanel extends JPanel implements StatusListener{
         super();
         setLayout(new MigLayout());
         this.securityService = securityService;
-
+        securityService.addStatusListener(this);
         panelLabel.setFont(StyleService.HEADING_FONT);
         addNewSensorButton.addActionListener(e ->
                 addSensor(new Sensor(newSensorNameField.getText(),
@@ -61,6 +61,11 @@ public class SensorPanel extends JPanel implements StatusListener{
         p.add(newSensorTypeDropdown, "wrap");
         p.add(addNewSensorButton, "span 3");
         return p;
+    }
+
+    @Override
+    public void sensorStatusChanged() {
+        updateSensorList(sensorListPanel);
     }
 
     /**
@@ -130,8 +135,5 @@ public class SensorPanel extends JPanel implements StatusListener{
 
     }
 
-    @Override
-    public void sensorStatusChanged() {
-        updateSensorList(sensorListPanel);
-    }
+
 }

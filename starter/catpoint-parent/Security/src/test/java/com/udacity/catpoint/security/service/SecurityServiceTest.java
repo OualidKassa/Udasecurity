@@ -214,7 +214,7 @@ public class SecurityServiceTest {
     @ParameterizedTest
     @EnumSource(value = ArmingStatus.class, names = {"ARMED_HOME", "ARMED_AWAY"})
     public void if_the_system_is_armed_reset_all_sensors_to_inactive(ArmingStatus status){
-        Set<Sensor> sensors = getSensors(false, 3);
+        Set<Sensor> sensors = getSensors(true, 3);
         when(securityRepository.getAlarmStatus()).thenReturn(AlarmStatus.PENDING_ALARM);
         when(securityRepository.getSensors()).thenReturn(sensors);
         securityService.setArmingStatus(status);
